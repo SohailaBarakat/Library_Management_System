@@ -3,7 +3,6 @@ package com.books.library.management.system.mapper;
 
 import com.books.library.management.system.dto.BookDTO;
 import com.books.library.management.system.entity.Book;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -53,7 +52,7 @@ public class BookMapper {
             return null;
         }
 
-        List<BookDTO> list = new ArrayList<BookDTO>( books.size() );
+        List<BookDTO> list = new ArrayList<>(books.size());
         for ( Book book : books ) {
             list.add( toDto( book ) );
         }

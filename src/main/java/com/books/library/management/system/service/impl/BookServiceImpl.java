@@ -1,6 +1,5 @@
 package com.books.library.management.system.service.impl;
 
-import com.books.library.management.system.controller.BookController;
 import com.books.library.management.system.dto.BookDTO;
 import com.books.library.management.system.entity.Book;
 import com.books.library.management.system.exception.handling.BaseException;
@@ -9,8 +8,6 @@ import com.books.library.management.system.mapper.BookMapper;
 import com.books.library.management.system.repo.BookRepository;
 import com.books.library.management.system.service.IBookService;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +15,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class BookServiceImpl implements IBookService {
-    private static final Logger logger = LoggerFactory.getLogger(BookController.class);
 
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
@@ -40,7 +36,6 @@ public class BookServiceImpl implements IBookService {
     public Void add(BookDTO bookDTO) {
         validateIsbnUniqueness(bookDTO.getIsbn());
         Book book = bookMapper.toEntity(bookDTO);
-        logger.info("BookId:  {} BookCopies: {}", book.getId(), book.getCopiesAvailable());
         bookRepository.save(book);
         return null;
     }
