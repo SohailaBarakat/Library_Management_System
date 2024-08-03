@@ -44,6 +44,5 @@ mvn spring-boot: run
 - **Borrowing API**
   - Borrow and return books.
 
-
-
-
+### Accessing the API Documentation
+For detailed API documentation, including endpoint URLs, request/response examples, and more, please refer to the [API Documentation](https://github.com/SohailaBarakat/library_management_system/blob/master/API_DOCUMENTATION.md)
