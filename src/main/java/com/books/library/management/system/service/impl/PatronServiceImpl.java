@@ -9,6 +9,7 @@ import com.books.library.management.system.repo.PatronRepository;
 import com.books.library.management.system.service.IPatronService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,12 +22,14 @@ public class PatronServiceImpl implements IPatronService {
 
 
     @Override
+    @Transactional(readOnly = true)
     public List<PatronDTO> getAll() {
         return patronMapper.toDto(patronRepository.findAll());
     }
 
 
     @Override
+    @Transactional(readOnly = true)
     public PatronDTO getById(Long id) {
         return patronRepository.findById(id)
                 .map(patronMapper::toDto)
@@ -35,6 +38,7 @@ public class PatronServiceImpl implements IPatronService {
 
 
     @Override
+    @Transactional
     public Void add(PatronDTO patronDTO) {
         validateEmailUniqueness(patronDTO.getEmail());
         Patron patron = patronMapper.toEntity(patronDTO);
@@ -44,6 +48,7 @@ public class PatronServiceImpl implements IPatronService {
 
 
     @Override
+    @Transactional
     public PatronDTO update(Long id, PatronDTO patronDTO) {
         Patron existingPatron = patronRepository.findById(id)
                 .orElseThrow(() -> createNotFoundException(id));
@@ -59,6 +64,7 @@ public class PatronServiceImpl implements IPatronService {
 
 
     @Override
+    @Transactional
     public Void delete(Long id) {
         if (!patronRepository.existsById(id)){
             throw createNotFoundException(id);

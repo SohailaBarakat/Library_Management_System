@@ -7,7 +7,10 @@ import com.books.library.management.system.exception.handling.enums.ErrorCode;
 import com.books.library.management.system.mapper.BookMapper;
 import com.books.library.management.system.repo.BookRepository;
 import com.books.library.management.system.service.IBookService;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,11 +24,15 @@ public class BookServiceImpl implements IBookService {
 
 
     @Override
+    @Transactional(readOnly = true)
+    @Cacheable("books")
     public List<BookDTO> getAll() {
         return bookMapper.toDto(bookRepository.findAll());
     }
 
     @Override
+    @Transactional(readOnly = true)
+    @Cacheable(value = "books", key = "#id")
     public BookDTO getById(Long id) {
         return bookRepository.findById(id)
                 .map(bookMapper::toDto)
@@ -33,6 +40,8 @@ public class BookServiceImpl implements IBookService {
     }
 
     @Override
+    @Transactional
+    @CacheEvict(value = "books", allEntries = true)
     public Void add(BookDTO bookDTO) {
         validateIsbnUniqueness(bookDTO.getIsbn());
         Book book = bookMapper.toEntity(bookDTO);
@@ -41,6 +50,8 @@ public class BookServiceImpl implements IBookService {
     }
 
     @Override
+    @Transactional
+    @CacheEvict(value = "books", key = "#id")
     public BookDTO update(Long id, BookDTO bookDTO) {
         Book existingBook = bookRepository.findById(id)
                 .orElseThrow(() -> createNotFoundException(id));
@@ -57,6 +68,8 @@ public class BookServiceImpl implements IBookService {
     }
 
     @Override
+    @Transactional
+    @CacheEvict(value = "books", key = "#id")
     public Void delete(Long id) {
         if (!bookRepository.existsById(id)) {
             throw createNotFoundException(id);

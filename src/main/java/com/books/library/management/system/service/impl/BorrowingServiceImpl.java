@@ -11,6 +11,7 @@ import com.books.library.management.system.repo.PatronRepository;
 import com.books.library.management.system.service.IBorrowingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -23,6 +24,7 @@ public class BorrowingServiceImpl implements IBorrowingService {
     private final BorrowingRecordRepository borrowingRecordRepository;
 
     @Override
+    @Transactional
     public void borrowBook(Long bookId, Long patronId) {
         Book book = findBookById(bookId);
         Patron patron = findPatronById(patronId);
@@ -38,6 +40,7 @@ public class BorrowingServiceImpl implements IBorrowingService {
     }
 
     @Override
+    @Transactional
     public void returnBook(Long bookId, Long patronId) {
         Book book = findBookById(bookId);
         BorrowingRecord record = findBorrowingRecord(bookId, patronId);
