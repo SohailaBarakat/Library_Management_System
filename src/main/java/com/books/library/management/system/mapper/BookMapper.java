@@ -4,11 +4,12 @@ package com.books.library.management.system.mapper;
 import com.books.library.management.system.dto.BookDTO;
 import com.books.library.management.system.entity.Book;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Component
 public class BookMapper {
     public BookMapper(){}
 

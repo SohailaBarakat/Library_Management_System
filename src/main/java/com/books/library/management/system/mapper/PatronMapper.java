@@ -4,11 +4,14 @@ import com.books.library.management.system.dto.BorrowingRecordDTO;
 import com.books.library.management.system.dto.PatronDTO;
 import com.books.library.management.system.entity.BorrowingRecord;
 import com.books.library.management.system.entity.Patron;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
+@Component
 public class PatronMapper {
     public PatronMapper(){}
 

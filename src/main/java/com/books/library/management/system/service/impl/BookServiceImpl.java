@@ -22,6 +22,8 @@ public class BookServiceImpl implements IBookService {
 
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
+
+
     @Override
     public List<BookDTO> getAll() {
         return bookMapper.toDto(bookRepository.findAll());
