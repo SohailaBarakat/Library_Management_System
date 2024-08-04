@@ -7,6 +7,7 @@ import com.books.library.management.system.exception.handling.enums.ErrorCode;
 import com.books.library.management.system.mapper.BookMapper;
 import com.books.library.management.system.repo.BookRepository;
 import com.books.library.management.system.service.IBookService;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
@@ -51,7 +52,7 @@ public class BookServiceImpl implements IBookService {
 
     @Override
     @Transactional
-    @CacheEvict(value = "books", key = "#id")
+    @CacheEvict(value = "books", allEntries = true)
     public BookDTO update(Long id, BookDTO bookDTO) {
         Book existingBook = bookRepository.findById(id)
                 .orElseThrow(() -> createNotFoundException(id));
@@ -69,7 +70,7 @@ public class BookServiceImpl implements IBookService {
 
     @Override
     @Transactional
-    @CacheEvict(value = "books", key = "#id")
+    @CacheEvict(value = "books", allEntries = true)
     public Void delete(Long id) {
         if (!bookRepository.existsById(id)) {
             throw createNotFoundException(id);
