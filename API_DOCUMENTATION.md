@@ -1,5 +1,34 @@
 
 # Detailed API Documentation 
+
+## Authentication
+
+### Sign Up
+- **Endpoint:** `POST /api/auth/signup`
+- **Description:** Registers a new user in the system with a **unique** email.
+- *Request Body:**
+  ```json
+  {
+    "email" : "string",
+    "password" : "string",
+    "firstName" :"string",
+    "secondName":"string"
+  }
+
+### Sign In
+- **Endpoint:** `POST /api/auth/signin`
+- **Description:** sign in to generate a token
+- *Request Body:**
+  ```json
+  {
+    "email" : "string",
+    "password" : "string",
+  }
+
+> **Note:** All API endpoints require authentication. To access the APIs, you must first sign in using the `POST /api/auth/signin` endpoint to obtain an authentication token, and include the token in the `Authorization` header of your requests. 
+***
+
+
 ## Books API
 
 ### Get All Books
