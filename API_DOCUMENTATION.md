@@ -24,6 +24,17 @@
     "email" : "string",
     "password" : "string",
   }
+  
+- *Response Body:**
+  ```json
+    {
+    "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzb2hhaWxhLmJhcmFrYXRAZ21haWwuY29tIiwiaWF0IjoxNzIyNzgxNjQ5LCJleHAiOjE3MjI4NjgwNDl9.ZHmgSQNvL2IusHKTG7TkBN3y0xXVa7TKbvglglWmViKxcTTJZH4s_qX_2DCP5etd_d2p5jtGKSZf_qp3RTT60A",
+    "id": 2,
+    "email": "sohaila.barakat@gmail.com"
+  }
+
+  
+  
 
 > **Note:** All API endpoints require authentication. To access the APIs, you must first sign in using the `POST /api/auth/signin` endpoint to obtain an authentication token, and include the token in the `Authorization` header of your requests. 
 ***
